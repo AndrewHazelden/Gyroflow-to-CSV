@@ -1,5 +1,5 @@
 '''
-Gyroflow Fusion
+Gyroflow Fusion v1.0 2023-01-17 07:00 AM
 
 Video Stabilization Using Gyroscope Data
 
@@ -36,6 +36,7 @@ global gyroflow_dragdrop
 
 # Quaternions
 def process(gyroflow_path, quaternion_type, convert_to_euler, all_timestamps):
+    print("\n[Gyroflow Raw Values] [Path]", gyroflow_path, "[quaternion_type]", quaternion_type, "[convert_to_euler]", convert_to_euler, " [all_timestamps]", all_timestamps)
     if not os.path.exists(gyroflow_path):
         print("\n[Gyroflow Error] [File] \"", gyroflow_path, "\" was not found")
         return
@@ -78,6 +79,7 @@ def process(gyroflow_path, quaternion_type, convert_to_euler, all_timestamps):
                 data.extend(quaternion_to_euler_angle(val[0], val[1], val[2], val[3]))
             else:
                 data.extend([val[0], val[1], val[2], val[3]])
+                #data.extend(val[0], val[1], val[2], val[3])
             csv_rows.append(data)
 
             printProgressBar(i + 1, item_length, prefix = 'Processing gyro datas:', suffix = 'Complete', length = 50)
@@ -95,6 +97,7 @@ def process(gyroflow_path, quaternion_type, convert_to_euler, all_timestamps):
                 data.extend(quaternion_to_euler_angle(item[1], item[2], item[3], item[4]))
             else:
                 data.extend([item[1], item[2], item[3], item[4]])
+                #data.extend(item[1], item[2], item[3], item[4])
             csv_rows.append(data)
 
             printProgressBar(i + 1, num_frames, prefix = 'Processing gyro data:', suffix = 'Complete', length = 50)
